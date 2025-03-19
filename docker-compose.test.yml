@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongodb-test
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=dpwo_test_db
+    depends_on:
+      - mongodb-test
+    networks:
+      - dpwo-test-network
+    user: root
+
+  mongodb-test:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+    networks:
+      - dpwo-test-network
+
+volumes:
+  mongodb_test_data:
+
+networks:
+  dpwo-test-network:
+    driver: bridge 
