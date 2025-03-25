@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -28,18 +30,9 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
         User user = userMapper.toEntity(registerRequest);
-        userService.createUser(user);
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        registerRequest.getUsername(), 
-                        registerRequest.getPassword())
-        );
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String jwt = jwtUtils.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        User savedUser = userService.createUser(user);
+        
+        return ResponseEntity.ok(new RegisterResponse("User registered successfully"));
     }
 
     @PostMapping("/login")
@@ -58,3 +51,4 @@ public class AuthController {
 }
 
 record JwtResponse(String token) {} 
+record RegisterResponse(String message) {} 
