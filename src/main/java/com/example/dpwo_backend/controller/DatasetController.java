@@ -1,6 +1,7 @@
 package com.example.dpwo_backend.controller;
 
 import com.example.dpwo_backend.dto.dataset.DatasetRequest;
+import com.example.dpwo_backend.dto.dataset.SetSchemaRequest;
 import com.example.dpwo_backend.mapper.DatasetMapper;
 import com.example.dpwo_backend.model.Dataset;
 import com.example.dpwo_backend.service.DatasetService;
@@ -23,8 +24,8 @@ public class DatasetController {
     public ResponseEntity<String> createDataset(@Valid @RequestBody DatasetRequest datasetRequest,
                                                 Authentication authentication) {
         Dataset dataset = datasetMapper.toEntity(datasetRequest);
-        datasetService.createDataset(dataset);
-        return ResponseEntity.ok("Dataset created successfully");
+        String id = datasetService.createDataset(dataset).getId();
+        return ResponseEntity.ok("Dataset(id: " + id + ") created successfully");
     }
 
     @GetMapping
@@ -32,4 +33,8 @@ public class DatasetController {
         return ResponseEntity.ok(datasetService.getAllDatasets());
     }
 
+    @PutMapping("/setSchema")
+    public void setSchema(@Valid @RequestBody SetSchemaRequest request, Authentication authentication) {
+        datasetService.setDatasetSchema(request.getId(), request.getSchemaId());
+    }
 }

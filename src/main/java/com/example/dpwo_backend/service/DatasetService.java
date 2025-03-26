@@ -19,4 +19,12 @@ public class DatasetService {
     public List<Dataset> getAllDatasets() {
         return datasetRepository.findAll();
     }
+
+    public void setDatasetSchema(String id, String schemaId) {
+        datasetRepository.findById(id)
+                .ifPresent(dataset -> {
+                    dataset.setSchemaId(schemaId);
+                    datasetRepository.save(dataset);
+                });
+    }
 }
