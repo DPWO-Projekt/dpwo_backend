@@ -9,7 +9,6 @@ import com.example.dpwo_backend.service.DataSchemaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class DataSchemaController {
     private final DataSchemaMapper dataSchemaMapper;
 
     @PostMapping
-    public ResponseEntity<String> createDataSchema(@Valid @RequestBody DataSchemaRequest dataSchemaRequest, Authentication authentication) {
+    public ResponseEntity<String> createDataSchema(@Valid @RequestBody DataSchemaRequest dataSchemaRequest) {
         DataSchema dataSchema = dataSchemaMapper.toEntity(dataSchemaRequest);
         dataSchemaService.createDataSchema(dataSchema);
         return ResponseEntity.ok("Data schema created successfully");
@@ -35,5 +34,18 @@ public class DataSchemaController {
         return ResponseEntity.ok(dataSchemaMapper.toResponseList(dataSchemas));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DataSchemaResponse> getDataSchema(@PathVariable String id) {
+        DataSchema dataSchema = dataSchemaService.getDataSchema(id);
+        return ResponseEntity.ok(dataSchemaMapper.toResponse(dataSchema));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateDataSchema(@PathVariable String id, @Valid @RequestBody DataSchemaRequest dataSchemaRequest) {
+        DataSchema dataSchema = dataSchemaMapper.toEntity(dataSchemaRequest);
+        dataSchema.setId(id);
+        dataSchemaService.createDataSchema(dataSchema);
+        return ResponseEntity.ok("Data schema updated successfully");
+    }
 
 }
