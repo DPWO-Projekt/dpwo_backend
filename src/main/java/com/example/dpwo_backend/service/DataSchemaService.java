@@ -22,4 +22,9 @@ public class DataSchemaService {
     public List<DataSchema> getDataSchemas() {
         return dataSchemaRepository.findAll();
     }
+
+    public DataSchema getDataSchema(String id) {
+        return dataSchemaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Data schema not found"));
+    }
 }
