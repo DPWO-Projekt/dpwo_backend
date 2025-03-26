@@ -55,4 +55,17 @@ public class DatasetServiceTest {
         assertEquals(dataset.getTheme(), createdDataset.getTheme());
         verify(datasetRepository).save(any(Dataset.class));
     }
+
+    @Test
+    @DisplayName("Should get all datasets successfully")
+    void getAllDatasets_ShouldReturnAllDatasets() {
+        List<Dataset> datasets = List.of(dataset);
+        when(datasetRepository.findAll()).thenReturn(datasets);
+
+        List<Dataset> result = datasetService.getAllDatasets();
+
+        assertNotNull(result);
+        assertEquals(datasets, result);
+        verify(datasetRepository).findAll();
+    }
 }
