@@ -27,4 +27,8 @@ public class DatasetService {
                     datasetRepository.save(dataset);
                 });
     }
+
+    public void updateDataset(Dataset dataset) {
+        datasetRepository.save(dataset);
+    }
 }

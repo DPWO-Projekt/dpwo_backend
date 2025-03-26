@@ -37,4 +37,11 @@ public class DatasetController {
     public void setSchema(@Valid @RequestBody SetSchemaRequest request, Authentication authentication) {
         datasetService.setDatasetSchema(request.getId(), request.getSchemaId());
     }
+
+    @PutMapping("/{id}")
+    public void updateDataset(@PathVariable String id, @Valid @RequestBody DatasetRequest datasetRequest, Authentication authentication) {
+        Dataset dataset = datasetMapper.toEntity(datasetRequest);
+        dataset.setId(id);
+        datasetService.updateDataset(dataset);
+    }
 }
