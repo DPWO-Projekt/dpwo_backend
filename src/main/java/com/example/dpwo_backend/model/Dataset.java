@@ -13,4 +13,5 @@ public class Dataset {
     private String id;
     private String theme;
     private List<LanguageSpecificDatasetInfo> languageSpecificDatasetInfos;
+    private String schemaId;
 }

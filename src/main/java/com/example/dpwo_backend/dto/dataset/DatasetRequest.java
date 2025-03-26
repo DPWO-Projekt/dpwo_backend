@@ -14,4 +14,6 @@ public class DatasetRequest {
 
     @NotEmpty(message = "Dataset should be defined for at least one language")
     private List<LanguageSpecificDatasetInfoRequest> datasetInfo;
+
+    private String schemaId;
 }

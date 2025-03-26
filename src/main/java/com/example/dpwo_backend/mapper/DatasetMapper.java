@@ -15,6 +15,7 @@ public class DatasetMapper {
         dataset.setTheme(datasetRequest.getTheme());
         dataset.setLanguageSpecificDatasetInfos(
                 datasetRequest.getDatasetInfo().stream().map(languageSpecificDatasetInfoMapper::toEntity).toList());
+        dataset.setSchemaId(datasetRequest.getSchemaId());
         return dataset;
     }
 }
