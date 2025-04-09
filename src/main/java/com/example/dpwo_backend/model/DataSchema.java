@@ -10,6 +10,6 @@ import java.util.Map;
 public class DataSchema {
     @Id
     private String id;
-    private String title;
+    private String name;
     private Map<String, String> properties;
 }

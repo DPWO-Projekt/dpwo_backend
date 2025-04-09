@@ -1,6 +1,7 @@
 package com.example.dpwo_backend.controller;
 
 import com.example.dpwo_backend.dto.dataset.DatasetRequest;
+import com.example.dpwo_backend.dto.dataset.DatasetResponse;
 import com.example.dpwo_backend.dto.dataset.SetSchemaRequest;
 import com.example.dpwo_backend.mapper.DatasetMapper;
 import com.example.dpwo_backend.model.Dataset;
@@ -29,19 +30,28 @@ public class DatasetController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Dataset>> getAllDatasets(Authentication authentication) {
-        return ResponseEntity.ok(datasetService.getAllDatasets());
+    public ResponseEntity<List<DatasetResponse>> getAllDatasets(Authentication authentication) {
+        List<Dataset> datasets = datasetService.getAllDatasets();
+        return ResponseEntity.ok(datasetMapper.toResponseList(datasets));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatasetResponse> getDataset(@PathVariable String id, Authentication authentication) {
+        Dataset dataset = datasetService.getDatasetById(id);
+        return ResponseEntity.ok(datasetMapper.toResponse(dataset));
     }
 
     @PutMapping("/setSchema")
-    public void setSchema(@Valid @RequestBody SetSchemaRequest request, Authentication authentication) {
-        datasetService.setDatasetSchema(request.getId(), request.getSchemaId());
+    public ResponseEntity<DatasetResponse> setSchema(@Valid @RequestBody SetSchemaRequest request, Authentication authentication) {
+        Dataset dataset = datasetService.setDatasetSchema(request.getId(), request.getSchemaId());
+        return ResponseEntity.ok(datasetMapper.toResponse(dataset));
     }
 
     @PutMapping("/{id}")
-    public void updateDataset(@PathVariable String id, @Valid @RequestBody DatasetRequest datasetRequest, Authentication authentication) {
+    public ResponseEntity<DatasetResponse> updateDataset(@PathVariable String id, @Valid @RequestBody DatasetRequest datasetRequest, Authentication authentication) {
         Dataset dataset = datasetMapper.toEntity(datasetRequest);
         dataset.setId(id);
-        datasetService.updateDataset(dataset);
+        Dataset updatedDataset = datasetService.updateDataset(dataset);
+        return ResponseEntity.ok(datasetMapper.toResponse(updatedDataset));
     }
 }

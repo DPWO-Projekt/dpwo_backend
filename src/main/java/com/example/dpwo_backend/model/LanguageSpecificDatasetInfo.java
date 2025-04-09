@@ -7,12 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document(collection = "language_specific_dataset_info")
 public class LanguageSpecificDatasetInfo {
-    @Id
-    private String id;
     private String title;
     private String description;
-    private List<String> keywords;
-    private String languageCode;
+    private List<String> keyword;
+    private String langCode;
 }

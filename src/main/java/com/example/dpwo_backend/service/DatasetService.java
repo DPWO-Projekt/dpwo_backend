@@ -19,16 +19,21 @@ public class DatasetService {
     public List<Dataset> getAllDatasets() {
         return datasetRepository.findAll();
     }
-
-    public void setDatasetSchema(String id, String schemaId) {
-        datasetRepository.findById(id)
-                .ifPresent(dataset -> {
-                    dataset.setSchemaId(schemaId);
-                    datasetRepository.save(dataset);
-                });
+    
+    public Dataset getDatasetById(String id) {
+        return datasetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dataset not found with id: " + id));
     }
 
-    public void updateDataset(Dataset dataset) {
-        datasetRepository.save(dataset);
+    public Dataset setDatasetSchema(String id, String schemaId) {
+        Dataset dataset = getDatasetById(id);
+        dataset.setSchemaId(schemaId);
+        return datasetRepository.save(dataset);
+    }
+
+    public Dataset updateDataset(Dataset dataset) {
+        // Verify dataset exists
+        getDatasetById(dataset.getId());
+        return datasetRepository.save(dataset);
     }
 }

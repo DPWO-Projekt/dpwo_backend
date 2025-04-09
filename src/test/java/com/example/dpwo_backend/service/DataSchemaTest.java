@@ -39,7 +39,7 @@ public class DataSchemaTest {
         
         dataSchema = new DataSchema();
         dataSchema.setId("1");
-        dataSchema.setTitle("Person Schema");
+        dataSchema.setName("Person Schema");
         dataSchema.setProperties(properties);
     }
     
@@ -60,7 +60,7 @@ public class DataSchemaTest {
         // Arrange
         DataSchema secondSchema = new DataSchema();
         secondSchema.setId("2");
-        secondSchema.setTitle("Product Schema");
+        secondSchema.setName("Product Schema");
         Map<String, String> productProps = new HashMap<>();
         productProps.put("productName", "string");
         productProps.put("price", "number");
@@ -75,8 +75,8 @@ public class DataSchemaTest {
         // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals("Person Schema", result.get(0).getTitle());
-        assertEquals("Product Schema", result.get(1).getTitle());
+        assertEquals("Person Schema", result.get(0).getName());
+        assertEquals("Product Schema", result.get(1).getName());
     }
     
     @Test
