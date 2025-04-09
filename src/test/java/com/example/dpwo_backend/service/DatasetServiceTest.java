@@ -39,9 +39,9 @@ public class DatasetServiceTest {
         languageSpecificDatasetInfo = new LanguageSpecificDatasetInfo();
         languageSpecificDatasetInfo.setTitle("Test Title");
         languageSpecificDatasetInfo.setDescription("Test Description");
-        languageSpecificDatasetInfo.setKeywords(List.of("Test Keyword"));
-        languageSpecificDatasetInfo.setLanguageCode("en");
-        dataset.setLanguageSpecificDatasetInfos(List.of(languageSpecificDatasetInfo));
+        languageSpecificDatasetInfo.setKeyword(List.of("Test Keyword"));
+        languageSpecificDatasetInfo.setLangCode("en");
+        dataset.setLanguageSpecificDatasetInfo(List.of(languageSpecificDatasetInfo));
     }
 
     @Test

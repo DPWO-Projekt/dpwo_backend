@@ -11,7 +11,9 @@ import java.util.List;
 public class Dataset {
     @Id
     private String id;
+    private String uri;
     private String theme;
-    private List<LanguageSpecificDatasetInfo> languageSpecificDatasetInfos;
+    private List<LanguageSpecificDatasetInfo> languageSpecificDatasetInfo;
     private String schemaId;
+    private VCard vCard;
 }

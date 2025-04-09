@@ -13,7 +13,7 @@ public class DataSchemaMapper {
 
     public DataSchema toEntity(DataSchemaRequest dataSchemaDto) {
         DataSchema dataSchema = new DataSchema();
-        dataSchema.setTitle(dataSchemaDto.getTitle());
+        dataSchema.setName(dataSchemaDto.getName());
         dataSchema.setProperties(dataSchemaDto.getProperties());
         return dataSchema;
     }
@@ -21,7 +21,7 @@ public class DataSchemaMapper {
     public DataSchemaResponse toResponse(DataSchema dataSchema) {
         DataSchemaResponse response = new DataSchemaResponse();
         response.setId(dataSchema.getId());
-        response.setTitle(dataSchema.getTitle());
+        response.setName(dataSchema.getName());
         response.setProperties(dataSchema.getProperties());
         return response;
     }

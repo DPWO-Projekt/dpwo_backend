@@ -18,8 +18,7 @@ public class LanguageSpecificDatasetInfoRequest {
     private String description;
 
     @NotBlank(message = "Language code is required")
-    private String languageCode;
+    private String langCode;
 
-    @NotEmpty(message = "At least one keyword is required")
-    private List<String> keywords;
+    private List<String> keyword;
 }
