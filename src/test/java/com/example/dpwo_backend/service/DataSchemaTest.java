@@ -1,7 +1,8 @@
 package com.example.dpwo_backend.service;
 
-import com.example.dpwo_backend.model.DataSchema;
-import com.example.dpwo_backend.repository.DataSchemaRepository;
+import com.example.dpwo_backend.dataschema.model.DataSchema;
+import com.example.dpwo_backend.dataschema.repository.DataSchemaRepository;
+import com.example.dpwo_backend.dataschema.service.DataSchemaService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

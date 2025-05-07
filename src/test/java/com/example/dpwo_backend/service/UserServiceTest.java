@@ -1,7 +1,8 @@
 package com.example.dpwo_backend.service;
 
-import com.example.dpwo_backend.model.User;
-import com.example.dpwo_backend.repository.UserRepository;
+import com.example.dpwo_backend.auth.model.User;
+import com.example.dpwo_backend.auth.repository.UserRepository;
+import com.example.dpwo_backend.auth.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
