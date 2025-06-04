@@ -17,4 +17,5 @@ public class Dataset {
     private String schemaId;
     private VCard vCard;
     private String parentCatalog;
+    private String ownerId;
 }

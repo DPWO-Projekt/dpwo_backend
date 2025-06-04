@@ -2,6 +2,7 @@ package com.example.dpwo_backend.dataset.controller;
 
 import com.example.dpwo_backend.dataset.dto.DatasetRequest;
 import com.example.dpwo_backend.dataset.dto.DatasetResponse;
+import com.example.dpwo_backend.dataset.dto.DatasetListResponse;
 import com.example.dpwo_backend.dataset.dto.SetSchemaRequest;
 import com.example.dpwo_backend.dataset.model.DatasetMapper;
 import com.example.dpwo_backend.dataset.model.Dataset;
@@ -10,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +26,9 @@ public class DatasetController {
 
     @PostMapping
     public ResponseEntity<String> createDataset(@Valid @RequestBody DatasetRequest datasetRequest,
-                                                Authentication authentication) {
+                                              @AuthenticationPrincipal UserDetails userDetails) {
         Dataset dataset = datasetMapper.toEntity(datasetRequest);
+        dataset.setOwnerId(userDetails.getUsername());
         String id = datasetService.createDataset(dataset).getId();
         return ResponseEntity.ok("Dataset(id: " + id + ") created successfully");
     }
@@ -53,5 +57,11 @@ public class DatasetController {
         dataset.setId(id);
         Dataset updatedDataset = datasetService.updateDataset(dataset);
         return ResponseEntity.ok(datasetMapper.toResponse(updatedDataset));
+    }
+
+    @GetMapping("/owned")
+    public ResponseEntity<DatasetListResponse> getOwnedDatasets(@AuthenticationPrincipal UserDetails userDetails) {
+        DatasetListResponse response = datasetService.getOwnedDatasets(userDetails.getUsername());
+        return ResponseEntity.ok(response);
     }
 }
