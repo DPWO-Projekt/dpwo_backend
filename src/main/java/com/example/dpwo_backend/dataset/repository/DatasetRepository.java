@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public interface DatasetRepository extends MongoRepository<Dataset, String> {
+    List<Dataset> findByParentCatalog(String parentCatalog);
     List<Dataset> findByOwnerId(String ownerId);
 }
