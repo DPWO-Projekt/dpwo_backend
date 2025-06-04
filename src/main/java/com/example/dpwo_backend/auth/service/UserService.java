@@ -3,6 +3,7 @@ package com.example.dpwo_backend.auth.service;
 import com.example.dpwo_backend.auth.model.User;
 import com.example.dpwo_backend.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,7 +29,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                new ArrayList<>()
+                List.of(new SimpleGrantedAuthority(user.getRole().name()))
         );
     }
 
