@@ -1,5 +1,8 @@
 package com.example.dpwo_backend.dataset.dto;
 
+import com.example.dpwo_backend.dataset.dto.datasetdistribution.DatasetDistributionResponse;
+import com.example.dpwo_backend.dataset.dto.languagespecificdatasetinfo.LanguageSpecificDatasetInfoResponse;
+import com.example.dpwo_backend.dataset.dto.vcard.VCardResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import java.util.List;
@@ -13,6 +16,7 @@ public class DatasetResponse {
     @JsonProperty("vCard")
     private VCardResponse vCard;
     private List<LanguageSpecificDatasetInfoResponse> languageSpecificDatasetInfo;
+    private List<DatasetDistributionResponse> datasetDistributions;
     @JsonProperty("parentCatalog")
     private String parentCatalog;
-} 
+}

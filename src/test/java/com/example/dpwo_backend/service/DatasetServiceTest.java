@@ -2,7 +2,7 @@ package com.example.dpwo_backend.service;
 
 import com.example.dpwo_backend.dataset.model.Dataset;
 import com.example.dpwo_backend.dataset.service.DatasetService;
-import com.example.dpwo_backend.dataset.model.LanguageSpecificDatasetInfo;
+import com.example.dpwo_backend.dataset.model.languagespecificdatasetinfo.LanguageSpecificDatasetInfo;
 import com.example.dpwo_backend.dataset.repository.DatasetRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

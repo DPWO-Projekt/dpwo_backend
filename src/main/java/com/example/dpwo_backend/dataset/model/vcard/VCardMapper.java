@@ -1,7 +1,7 @@
-package com.example.dpwo_backend.dataset.model;
+package com.example.dpwo_backend.dataset.model.vcard;
 
-import com.example.dpwo_backend.dataset.dto.VCardRequest;
-import com.example.dpwo_backend.dataset.dto.VCardResponse;
+import com.example.dpwo_backend.dataset.dto.vcard.VCardRequest;
+import com.example.dpwo_backend.dataset.dto.vcard.VCardResponse;
 import org.springframework.stereotype.Component;
 
 @Component

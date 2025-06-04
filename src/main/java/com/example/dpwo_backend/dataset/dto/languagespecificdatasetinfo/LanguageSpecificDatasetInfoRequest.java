@@ -1,4 +1,4 @@
-package com.example.dpwo_backend.dataset.dto;
+package com.example.dpwo_backend.dataset.dto.languagespecificdatasetinfo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
