@@ -1,5 +1,8 @@
 package com.example.dpwo_backend.dataset.model;
 
+import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistribution;
+import com.example.dpwo_backend.dataset.model.languagespecificdatasetinfo.LanguageSpecificDatasetInfo;
+import com.example.dpwo_backend.dataset.model.vcard.VCard;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,4 +21,5 @@ public class Dataset {
     private VCard vCard;
     private String parentCatalog;
     private String ownerId;
+    private List<DatasetDistribution> datasetDistributions;
 }

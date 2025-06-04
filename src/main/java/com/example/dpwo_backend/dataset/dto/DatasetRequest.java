@@ -1,5 +1,8 @@
 package com.example.dpwo_backend.dataset.dto;
 
+import com.example.dpwo_backend.dataset.dto.datasetdistribution.DatasetDistributionRequest;
+import com.example.dpwo_backend.dataset.dto.languagespecificdatasetinfo.LanguageSpecificDatasetInfoRequest;
+import com.example.dpwo_backend.dataset.dto.vcard.VCardRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -25,6 +28,7 @@ public class DatasetRequest {
     @JsonProperty("vCard")
     private VCardRequest vCard;
 
+    private List<DatasetDistributionRequest> datasetDistributions;
     @JsonProperty("parentCatalog")
     private String parentCatalog;
 }

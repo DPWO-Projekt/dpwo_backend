@@ -3,9 +3,11 @@ package com.example.dpwo_backend.dataset.controller;
 import com.example.dpwo_backend.dataset.dto.DatasetRequest;
 import com.example.dpwo_backend.dataset.dto.DatasetResponse;
 import com.example.dpwo_backend.dataset.dto.DatasetListResponse;
-import com.example.dpwo_backend.dataset.dto.SetSchemaRequest;
+import com.example.dpwo_backend.dataset.dto.dataschema.SetSchemaRequest;
+import com.example.dpwo_backend.dataset.dto.datasetdistribution.DatasetDistributionResponse;
 import com.example.dpwo_backend.dataset.model.DatasetMapper;
 import com.example.dpwo_backend.dataset.model.Dataset;
+import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistributionMapper;
 import com.example.dpwo_backend.dataset.service.DatasetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ import java.util.List;
 public class DatasetController {
     private final DatasetService datasetService;
     private final DatasetMapper datasetMapper;
+    private final DatasetDistributionMapper datasetDistributionMapper;
 
     @PostMapping
     public ResponseEntity<String> createDataset(@Valid @RequestBody DatasetRequest datasetRequest,
@@ -64,4 +67,11 @@ public class DatasetController {
         DatasetListResponse response = datasetService.getOwnedDatasets(userDetails.getUsername());
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/getDistributions/{id}")
+    public ResponseEntity<List<DatasetDistributionResponse>> getDistributions(@PathVariable String id, Authentication authentication) {
+        List<DatasetDistributionResponse> distributions = datasetDistributionMapper.toResponseList(datasetService.getDatasetDistributions(id));
+        return ResponseEntity.ok(distributions);
+    }
+
 }
