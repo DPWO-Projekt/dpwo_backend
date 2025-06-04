@@ -19,4 +19,4 @@ public class DatasetResponse {
     private List<DatasetDistributionResponse> datasetDistributions;
     @JsonProperty("parentCatalog")
     private String parentCatalog;
-} 
+}

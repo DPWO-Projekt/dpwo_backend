@@ -31,4 +31,6 @@ public class DatasetRequest {
     private List<DatasetDistributionRequest> datasetDistributions;
     @JsonProperty("parentCatalog")
     private String parentCatalog;
+
+    private List<DatasetDistributionRequest> datasetDistributions;
 }
