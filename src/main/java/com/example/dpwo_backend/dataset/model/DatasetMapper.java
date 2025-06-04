@@ -27,6 +27,7 @@ public class DatasetMapper {
         dataset.setVCard(vCardMapper.toEntity(datasetRequest.getVCard()));
         dataset.setDatasetDistributions(datasetRequest.getDatasetDistributions().stream().map(datasetDistributionMapper::toEntity).toList());
         dataset.setSchemaId(datasetRequest.getSchemaId());
+        dataset.setParentCatalog(datasetRequest.getParentCatalog());
         return dataset;
     }
     
@@ -43,6 +44,7 @@ public class DatasetMapper {
         if (dataset.getVCard() != null) {
             response.setVCard(vCardMapper.toResponse(dataset.getVCard()));
         }
+        response.setParentCatalog(dataset.getParentCatalog());
         return response;
     }
     
