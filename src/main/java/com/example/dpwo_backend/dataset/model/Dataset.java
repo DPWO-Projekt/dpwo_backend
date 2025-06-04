@@ -16,4 +16,5 @@ public class Dataset {
     private List<LanguageSpecificDatasetInfo> languageSpecificDatasetInfo;
     private String schemaId;
     private VCard vCard;
+    private String parentCatalog;
 }

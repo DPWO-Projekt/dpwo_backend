@@ -13,4 +13,6 @@ public class DatasetResponse {
     @JsonProperty("vCard")
     private VCardResponse vCard;
     private List<LanguageSpecificDatasetInfoResponse> languageSpecificDatasetInfo;
+    @JsonProperty("parentCatalog")
+    private String parentCatalog;
 } 
