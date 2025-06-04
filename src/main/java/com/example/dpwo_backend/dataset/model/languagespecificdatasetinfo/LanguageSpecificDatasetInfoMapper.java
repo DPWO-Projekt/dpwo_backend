@@ -1,7 +1,7 @@
-package com.example.dpwo_backend.dataset.model;
+package com.example.dpwo_backend.dataset.model.languagespecificdatasetinfo;
 
-import com.example.dpwo_backend.dataset.dto.LanguageSpecificDatasetInfoRequest;
-import com.example.dpwo_backend.dataset.dto.LanguageSpecificDatasetInfoResponse;
+import com.example.dpwo_backend.dataset.dto.languagespecificdatasetinfo.LanguageSpecificDatasetInfoRequest;
+import com.example.dpwo_backend.dataset.dto.languagespecificdatasetinfo.LanguageSpecificDatasetInfoResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

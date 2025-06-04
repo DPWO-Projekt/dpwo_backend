@@ -1,4 +1,4 @@
-package com.example.dpwo_backend.dataset.dto;
+package com.example.dpwo_backend.dataset.dto.dataschema;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
