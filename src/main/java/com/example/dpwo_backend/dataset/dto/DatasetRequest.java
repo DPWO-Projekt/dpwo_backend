@@ -28,6 +28,7 @@ public class DatasetRequest {
     @JsonProperty("vCard")
     private VCardRequest vCard;
 
+    private List<DatasetDistributionRequest> datasetDistributions;
     @JsonProperty("parentCatalog")
     private String parentCatalog;
 

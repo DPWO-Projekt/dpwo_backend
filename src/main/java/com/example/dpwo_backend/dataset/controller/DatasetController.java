@@ -73,4 +73,5 @@ public class DatasetController {
         List<DatasetDistributionResponse> distributions = datasetDistributionMapper.toResponseList(datasetService.getDatasetDistributions(id));
         return ResponseEntity.ok(distributions);
     }
+
 }
