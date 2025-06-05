@@ -28,6 +28,7 @@ public class DatasetDistributionMapper {
         response.setAvailability(datasetDistribution.getAvailability());
         response.setFormat(datasetDistribution.getFormat());
         response.setTitle(datasetDistribution.getTitle());
+        response.setDescription(datasetDistribution.getDescription());
         return response;
     }
 
