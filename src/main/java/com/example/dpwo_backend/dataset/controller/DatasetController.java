@@ -4,11 +4,14 @@ import com.example.dpwo_backend.dataset.dto.DatasetRequest;
 import com.example.dpwo_backend.dataset.dto.DatasetResponse;
 import com.example.dpwo_backend.dataset.dto.DatasetListResponse;
 import com.example.dpwo_backend.dataset.dto.dataschema.SetSchemaRequest;
+import com.example.dpwo_backend.dataset.dto.datasetdistribution.DatasetDistributionRequest;
 import com.example.dpwo_backend.dataset.dto.datasetdistribution.DatasetDistributionResponse;
 import com.example.dpwo_backend.dataset.model.DatasetMapper;
 import com.example.dpwo_backend.dataset.model.Dataset;
+import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistribution;
 import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistributionMapper;
 import com.example.dpwo_backend.dataset.service.DatasetService;
+import com.example.dpwo_backend.dataset.service.DatasetDistributionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DatasetController {
     private final DatasetService datasetService;
+    private final DatasetDistributionService distributionService;
     private final DatasetMapper datasetMapper;
     private final DatasetDistributionMapper datasetDistributionMapper;
 
@@ -68,9 +72,40 @@ public class DatasetController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/getDistributions/{id}")
-    public ResponseEntity<List<DatasetDistributionResponse>> getDistributions(@PathVariable String id, Authentication authentication) {
-        List<DatasetDistributionResponse> distributions = datasetDistributionMapper.toResponseList(datasetService.getDatasetDistributions(id));
-        return ResponseEntity.ok(distributions);
+    // Distribution endpoints
+    @GetMapping("/{datasetId}/distributions")
+    public ResponseEntity<List<DatasetDistributionResponse>> getDatasetDistributions(@PathVariable String datasetId, Authentication authentication) {
+        List<DatasetDistribution> distributions = distributionService.getDistributionsByDatasetId(datasetId);
+        return ResponseEntity.ok(datasetDistributionMapper.toResponseList(distributions));
+    }
+
+    @PostMapping("/{datasetId}/distributions")
+    public ResponseEntity<DatasetDistributionResponse> createDistribution(@PathVariable String datasetId, @Valid @RequestBody DatasetDistributionRequest distributionRequest, Authentication authentication) {
+        DatasetDistribution distribution = datasetDistributionMapper.toEntity(distributionRequest, datasetId);
+        DatasetDistribution createdDistribution = distributionService.createDistribution(distribution);
+        return ResponseEntity.ok(datasetDistributionMapper.toResponse(createdDistribution));
+    }
+
+    @GetMapping("/distributions/{distributionId}")
+    public ResponseEntity<DatasetDistributionResponse> getDistribution(@PathVariable String distributionId, Authentication authentication) {
+        DatasetDistribution distribution = distributionService.getDistributionById(distributionId);
+        return ResponseEntity.ok(datasetDistributionMapper.toResponse(distribution));
+    }
+
+    @PutMapping("/distributions/{distributionId}")
+    public ResponseEntity<DatasetDistributionResponse> updateDistribution(@PathVariable String distributionId, @Valid @RequestBody DatasetDistributionRequest distributionRequest, Authentication authentication) {
+        DatasetDistribution distribution = datasetDistributionMapper.toEntity(distributionRequest);
+        distribution.setId(distributionId);
+        // Preserve the existing datasetId
+        DatasetDistribution existingDistribution = distributionService.getDistributionById(distributionId);
+        distribution.setDatasetId(existingDistribution.getDatasetId());
+        DatasetDistribution updatedDistribution = distributionService.updateDistribution(distribution);
+        return ResponseEntity.ok(datasetDistributionMapper.toResponse(updatedDistribution));
+    }
+
+    @DeleteMapping("/distributions/{distributionId}")
+    public ResponseEntity<String> deleteDistribution(@PathVariable String distributionId, Authentication authentication) {
+        distributionService.deleteDistribution(distributionId);
+        return ResponseEntity.ok("Distribution deleted successfully");
     }
 }

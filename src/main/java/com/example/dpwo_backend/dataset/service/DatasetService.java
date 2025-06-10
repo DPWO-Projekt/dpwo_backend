@@ -2,7 +2,6 @@ package com.example.dpwo_backend.dataset.service;
 
 import com.example.dpwo_backend.dataset.dto.DatasetListResponse;
 import com.example.dpwo_backend.dataset.model.Dataset;
-import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistribution;
 import com.example.dpwo_backend.dataset.repository.DatasetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,10 +37,6 @@ public class DatasetService {
         // Verify dataset exists
         getDatasetById(dataset.getId());
         return datasetRepository.save(dataset);
-    }
-
-    public List<DatasetDistribution> getDatasetDistributions(String id) {
-        return getDatasetById(id).getDatasetDistributions();
     }
 
     public DatasetListResponse getOwnedDatasets(String ownerId) {

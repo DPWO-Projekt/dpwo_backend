@@ -11,6 +11,17 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class DatasetDistributionMapper {
+    public DatasetDistribution toEntity(DatasetDistributionRequest datasetDistributionRequest, String datasetId) {
+        DatasetDistribution datasetDistribution = new DatasetDistribution();
+        datasetDistribution.setDatasetId(datasetId);
+        datasetDistribution.setUrl(datasetDistributionRequest.getUrl());
+        datasetDistribution.setAvailability(datasetDistributionRequest.getAvailability());
+        datasetDistribution.setFormat(datasetDistributionRequest.getFormat());
+        datasetDistribution.setTitle(datasetDistributionRequest.getTitle());
+        datasetDistribution.setDescription(datasetDistributionRequest.getDescription());
+        return datasetDistribution;
+    }
+
     public DatasetDistribution toEntity(DatasetDistributionRequest datasetDistributionRequest) {
         DatasetDistribution datasetDistribution = new DatasetDistribution();
         datasetDistribution.setUrl(datasetDistributionRequest.getUrl());

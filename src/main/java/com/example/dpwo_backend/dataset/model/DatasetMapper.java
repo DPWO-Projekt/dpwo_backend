@@ -2,7 +2,6 @@ package com.example.dpwo_backend.dataset.model;
 
 import com.example.dpwo_backend.dataset.dto.DatasetRequest;
 import com.example.dpwo_backend.dataset.dto.DatasetResponse;
-import com.example.dpwo_backend.dataset.model.datasetdistribution.DatasetDistributionMapper;
 import com.example.dpwo_backend.dataset.model.languagespecificdatasetinfo.LanguageSpecificDatasetInfoMapper;
 import com.example.dpwo_backend.dataset.model.vcard.VCardMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 public class DatasetMapper {
     private final LanguageSpecificDatasetInfoMapper languageSpecificDatasetInfoMapper;
     private final VCardMapper vCardMapper;
-    private final DatasetDistributionMapper datasetDistributionMapper;
 
     public Dataset toEntity(DatasetRequest datasetRequest) {
         Dataset dataset = new Dataset();
@@ -25,7 +23,6 @@ public class DatasetMapper {
         dataset.setLanguageSpecificDatasetInfo(
                 datasetRequest.getLanguageSpecificDatasetInfo().stream().map(languageSpecificDatasetInfoMapper::toEntity).toList());
         dataset.setVCard(vCardMapper.toEntity(datasetRequest.getVCard()));
-        dataset.setDatasetDistributions(datasetRequest.getDatasetDistributions().stream().map(datasetDistributionMapper::toEntity).toList());
         dataset.setSchemaId(datasetRequest.getSchemaId());
         dataset.setParentCatalog(datasetRequest.getParentCatalog());
         return dataset;
@@ -39,8 +36,6 @@ public class DatasetMapper {
         response.setLanguageSpecificDatasetInfo(
                 languageSpecificDatasetInfoMapper.toResponseList(dataset.getLanguageSpecificDatasetInfo()));
         response.setSchemaId(dataset.getSchemaId());
-        response.setDatasetDistributions(
-                datasetDistributionMapper.toResponseList(dataset.getDatasetDistributions()));
         if (dataset.getVCard() != null) {
             response.setVCard(vCardMapper.toResponse(dataset.getVCard()));
         }

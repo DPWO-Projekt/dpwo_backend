@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class DatasetDistribution {
     @Id
     private String id;
+    private String datasetId;
     private String url;
     private Availability availability;
     private String format;
