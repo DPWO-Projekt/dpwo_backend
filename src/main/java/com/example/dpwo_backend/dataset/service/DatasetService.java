@@ -39,15 +39,10 @@ public class DatasetService {
         return datasetRepository.save(dataset);
     }
 
-    public DatasetListResponse getOwnedDatasets(String ownerId) {
+    public List<Dataset>  getOwnedDatasets(String ownerId) {
         List<Dataset> datasets = datasetRepository.findByOwnerId(ownerId);
 
-        DatasetListResponse response = new DatasetListResponse();
-        response.setDatasets(datasets.stream()
-            .map(this::mapToDatasetListItem)
-            .collect(Collectors.toList()));
-
-        return response;
+        return datasets;
     }
 
     private DatasetListResponse.DatasetListItem mapToDatasetListItem(Dataset dataset) {

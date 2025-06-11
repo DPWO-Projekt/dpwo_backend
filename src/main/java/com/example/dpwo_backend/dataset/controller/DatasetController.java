@@ -67,9 +67,9 @@ public class DatasetController {
     }
 
     @GetMapping("/owned")
-    public ResponseEntity<DatasetListResponse> getOwnedDatasets(@AuthenticationPrincipal UserDetails userDetails) {
-        DatasetListResponse response = datasetService.getOwnedDatasets(userDetails.getUsername());
-        return ResponseEntity.ok(response);
+    public ResponseEntity<List<DatasetResponse>> getOwnedDatasets(@AuthenticationPrincipal UserDetails userDetails) {
+        List<Dataset> datasets = datasetService.getOwnedDatasets(userDetails.getUsername());
+        return ResponseEntity.ok(datasetMapper.toResponseList(datasets));
     }
 
     // Distribution endpoints
