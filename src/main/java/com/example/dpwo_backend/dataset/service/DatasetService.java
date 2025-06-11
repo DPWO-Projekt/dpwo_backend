@@ -35,14 +35,14 @@ public class DatasetService {
 
     public Dataset updateDataset(Dataset dataset) {
         // Verify dataset exists
-        getDatasetById(dataset.getId());
+        Dataset existingDataset = getDatasetById(dataset.getId());
+        dataset.setOwnerId(existingDataset.getOwnerId());
         return datasetRepository.save(dataset);
     }
 
     public List<Dataset>  getOwnedDatasets(String ownerId) {
-        List<Dataset> datasets = datasetRepository.findByOwnerId(ownerId);
 
-        return datasets;
+        return datasetRepository.findByOwnerId(ownerId);
     }
 
     private DatasetListResponse.DatasetListItem mapToDatasetListItem(Dataset dataset) {
